@@ -28,3 +28,21 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with {Plugin Name}. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
+
+if(!defined('ABSPATH')){
+    die('Nothing interesting here, be laylow');
+    exit;
+}
+
+if(!class_exists('WP_SLIDER_PLUGIN')){
+    class WP_SLIDER_PLUGIN{
+        function __construct(){
+
+        }
+    }
+}
+
+if(class_exists('WP_SLIDER_PLUGIN')){
+        $wp_slider_plugin = new WP_SLIDER_PLUGIN();
+}
+
