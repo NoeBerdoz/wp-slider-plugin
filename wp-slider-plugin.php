@@ -37,7 +37,13 @@ if(!defined('ABSPATH')){
 if(!class_exists('WP_SLIDER_PLUGIN')){
     class WP_SLIDER_PLUGIN{
         function __construct(){
+            $this->define_constants();
+        }
 
+        public function define_constants(){
+            define('WP_SLIDER_PLUGIN_PATH', plugin_dir_path(__FILE__));
+            define('WP_SLIDER_PLUGIN_URL', plugin_dir_url(__FILE__));
+            define('WP_SLIDER_PLUGIN_VERSION', '1.0.0');
         }
     }
 }
