@@ -45,10 +45,28 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
             define('WP_SLIDER_PLUGIN_URL', plugin_dir_url(__FILE__));
             define('WP_SLIDER_PLUGIN_VERSION', '1.0.0');
         }
+
+        public static function activate(){
+            update_option('rewrite_rules', ''); // Delete content in rewrite_rules from wp_options table
+        }
+
+        public static function deactivate(){
+            flush_rewrite_rules();
+
+        }
+
+        public static function uninstall(){
+
+        }
     }
 }
 
 if(class_exists('WP_SLIDER_PLUGIN')){
-        $wp_slider_plugin = new WP_SLIDER_PLUGIN();
+
+    register_activation_hook(__FILE__, array('WP_SLIDER_PLUGIN', 'activate'));
+    register_deactivation_hook(__FILE__, array('WP_SLIDER_PLUGIN', 'deactivate'));
+    register_uninstall_hook(__FILE__, array('WP_SLIDER_PLUGIN', 'uninstall'));
+
+    $wp_slider_plugin = new WP_SLIDER_PLUGIN();
 }
 
