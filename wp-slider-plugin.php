@@ -38,6 +38,9 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
     class WP_SLIDER_PLUGIN{
         function __construct(){
             $this->define_constants();
+
+            require_once(WP_SLIDER_PLUGIN_PATH . 'post-types/class.wp-slider-plugin-cpt.php');
+            $WP_SLIDER_PLUGIN_POST_TYPE = new WP_SLIDER_PLUGIN_POST_TYPE();
         }
 
         public function define_constants(){
