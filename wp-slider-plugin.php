@@ -55,6 +55,7 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
 
         public static function deactivate(){
             flush_rewrite_rules();
+            unregister_post_type('wp-slider-plugin');
 
         }
 
