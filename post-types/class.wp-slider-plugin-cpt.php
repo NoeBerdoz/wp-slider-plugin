@@ -6,6 +6,7 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
 
         function __construct() {
             add_action('init', array($this, 'create_post_type'));
+            add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
         }
 
         public function create_post_type(){
@@ -32,9 +33,27 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
                     'publicly_queryable' => true,
                     'show_in_rest' => true,
                     'menu_icon' => 'dashicons-images-alt2',
+                    'register_meta_box_cb' => array($this, 'add_meta_boxes')
                 )
             );
         }
+
+        public function add_meta_boxes(){
+            add_meta_box(
+                'wp_slider_plugin_meta_box',
+            'Link Options',
+                array($this, 'add_inner_meta_boxes'),
+                'wp-slider-plugin',
+                'normal',
+                'high'
+            );
+        }
+
+        public function add_inner_meta_boxes($post){
+            // Get data from post
+
+        }
+
 
     }
 }
