@@ -50,7 +50,7 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
         }
 
         public function add_inner_meta_boxes($post){
-            // Get data from post
+            require_once(WP_SLIDER_PLUGIN_PATH . 'views/wp-slider-plugin_metabox.php');
 
         }
 
