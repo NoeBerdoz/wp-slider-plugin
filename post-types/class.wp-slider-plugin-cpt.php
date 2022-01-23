@@ -55,6 +55,24 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
         }
 
         public function save_post($post_id){
+
+        	if(isset($_POST['wp_slider_plugin_nonce'])){
+        		if(!wp_verify_nonce($_POST['wp_slider_plugin_nonce'], 'wp_slider_plugin_nonce')){
+					return;
+		        }
+	        }
+
+        	if(defined('DOING AUTOSAVE') && DOING_AUTOSAVE){
+        		return;
+	        }
+
+        	if(isset($_POST['post_type']) && $_POST['post_type'] === 'wp_slider_plugin'){
+        		if(!current_user_can('edit_page', $post_id) || !current_user_can('edit_post', $post_id)){
+        			return;
+		        }
+
+	        }
+
             if(isset($_POST['action']) && $_POST['action'] == 'editpost'){
                 $old_link_text = get_post_meta($post_id, 'wp_slider_plugin_link_text', true);
                 $new_link_text = $_POST['wp_slider_plugin_link_text'];
