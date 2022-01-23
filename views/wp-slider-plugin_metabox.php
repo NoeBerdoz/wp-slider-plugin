@@ -1,3 +1,8 @@
+<?php
+    $meta = get_post_meta($post->ID);
+    $link_text = get_post_meta($post->ID, 'wp_slider_plugin_link_text', true);
+    $link_url = get_post_meta($post->ID, 'wp_slider_plugin_link_url', true);
+?>
 <table class="form-table wp-slider-plugin-metabox">
     <tr>
         <th>
@@ -9,7 +14,7 @@
                 name="wp_slider_plugin_link_text"
                 id="wp_slider_plugin_link_text"
                 class="regular-text link-text"
-                value=""
+                value="<?php echo (isset($link_text)) ? esc_html($link_text) : ''; ?>"
             >
         </td>
     </tr>
@@ -23,7 +28,7 @@
                 name="wp_slider_plugin_link_url"
                 id="wp_slider_plugin_link_url"
                 class="regular-text link-url"
-                value=""
+                value="<?php echo (isset($link_url)) ? esc_url($link_url) : ''; ?>"
             >
         </td>
     </tr>
