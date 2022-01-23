@@ -6,11 +6,10 @@
         <td>
             <input
                 type="text"
-                name="wp_slider_plugin_text"
+                name="wp_slider_plugin_link_text"
                 id="wp_slider_plugin_link_text"
                 class="regular-text link-text"
                 value=""
-                required
             >
         </td>
     </tr>
@@ -25,7 +24,6 @@
                 id="wp_slider_plugin_link_url"
                 class="regular-text link-url"
                 value=""
-                required
             >
         </td>
     </tr>
