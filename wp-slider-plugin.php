@@ -39,6 +39,8 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
         function __construct(){
             $this->define_constants();
 
+            add_action('admin_menu', array($this, 'add_menu'));
+
             require_once(WP_SLIDER_PLUGIN_PATH . 'post-types/class.wp-slider-plugin-cpt.php');
             $WP_SLIDER_PLUGIN_POST_TYPE = new WP_SLIDER_PLUGIN_POST_TYPE();
         }
@@ -61,6 +63,39 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
 
         public static function uninstall(){
 
+        }
+
+        public function add_menu(){
+        	add_menu_page(
+        		'WP Slider Options',
+		        'WP Slider PLugin',
+		        'manage_options',
+		        'wp_slider_plugin_admin',
+		        array($this, 'wp_slider_plugin_settings_page'),
+		        'dashicons-images-alt2'
+	        );
+
+        	add_submenu_page(
+		        'wp_slider_plugin_admin',
+		        'Manage Slides',
+		        'Manage Slides',
+		        'manage_options',
+		        'edit.php?post_type=wp-slider-plugin', // Link submenu to sliders page
+	            null
+	        );
+
+	        add_submenu_page(
+		        'wp_slider_plugin_admin',
+		        'Add New Slide',
+		        'Add New Slide',
+		        'manage_options',
+		        'post-new.php?post_type=wp-slider-plugin', // Link submenu to add new sliders page
+		        null
+	        );
+        }
+
+        public function wp_slider_plugin_settings_page(){
+        	echo "This is a test page";
         }
     }
 }
