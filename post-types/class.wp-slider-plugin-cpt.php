@@ -8,6 +8,9 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
             add_action('init', array($this, 'create_post_type'));
             add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
             add_action('save_post', array($this, 'save_post'), 10, 2);
+            add_filter('manage_wp-slider-plugin_posts_columns', array($this, 'wp_slider_plugin_cpt_columns')); // filter name based on custom post type key
+	        add_action('manage_wp-slider-plugin_posts_custom_column', array($this, 'wp_slider_custom_columns'), 10, 2); // function priority 10, 2 arguments
+	        add_filter('manage_edit-wp-slider-plugin_sortable_columns', array($this, 'wp_slider_plugin_sortable_columns'));
         }
 
         public function create_post_type(){
@@ -37,6 +40,31 @@ if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
                     'register_meta_box_cb' => array($this, 'add_meta_boxes')
                 )
             );
+        }
+
+        // Adds Columns Link Text and URL in Sliders list
+        public function wp_slider_plugin_cpt_columns($columns){
+        	$columns['wp_slider_plugin_link_text'] = esc_html__('Link Text', 'wp-slider-plugin');
+        	$columns['wp_slider_plugin_link_url'] = esc_html__('Link URL', 'wp-slider-plugin');
+        	return $columns;
+        }
+
+        // Display metabox Link Text and URL content in Sliders List
+        public function wp_slider_custom_columns($column, $post_id){
+        	switch ($column){
+		        case 'wp_slider_plugin_link_text':
+		        	echo esc_html(get_post_meta($post_id, 'wp_slider_plugin_link_text', true));
+		        break;
+		        case 'wp_slider_plugin_link_url':
+			        echo esc_url(get_post_meta($post_id, 'wp_slider_plugin_link_url', true));
+			    break;
+	        }
+        }
+
+        // Add asc/desc filter on column Link Text
+        public function wp_slider_plugin_sortable_columns($columns) {
+        	$columns['wp_slider_plugin_link_text'] = 'wp_slider_link_text';
+        	return $columns;
         }
 
         public function add_meta_boxes(){
