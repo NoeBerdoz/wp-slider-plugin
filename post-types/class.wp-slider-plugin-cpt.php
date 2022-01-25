@@ -1,8 +1,8 @@
 <?php
 // CPT -> CUSTOM POST TYPE
 
-if(!class_exists('WP_SLIDER_PLUGIN_POST_TYPE')){
-    class WP_SLIDER_PLUGIN_POST_TYPE {
+if(!class_exists( 'WP_Slider_Plugin_Post_Type' )){
+    class WP_Slider_Plugin_Post_Type {
 
         function __construct() {
             add_action('init', array($this, 'create_post_type'));

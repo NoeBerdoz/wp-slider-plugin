@@ -42,7 +42,10 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
             add_action('admin_menu', array($this, 'add_menu'));
 
             require_once(WP_SLIDER_PLUGIN_PATH . 'post-types/class.wp-slider-plugin-cpt.php');
-            $WP_SLIDER_PLUGIN_POST_TYPE = new WP_SLIDER_PLUGIN_POST_TYPE();
+            $WP_Slider_Plugin_Post_Type = new WP_Slider_Plugin_Post_Type();
+
+            require_once(WP_SLIDER_PLUGIN_PATH . 'class.wp-slider-plugin-settings.php');
+            $WP_Slider_Plugin_Settings = new WP_Slider_Plugin_Settings();
         }
 
         public function define_constants(){
@@ -95,7 +98,7 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
         }
 
         public function wp_slider_plugin_settings_page(){
-        	echo "This is a test page";
+        	require(WP_SLIDER_PLUGIN_PATH . 'views/settings-page.php');
         }
     }
 }
