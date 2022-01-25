@@ -4,6 +4,7 @@
         <?php
         settings_fields('wp_slider_plugin_group');
         do_settings_sections('wp_slider_plugin_page1');
+        do_settings_sections('wp_slider_plugin_page2');
         submit_button('Save Settings');
         ?>
     </form>
