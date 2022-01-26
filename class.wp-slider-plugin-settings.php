@@ -11,7 +11,7 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
         }
 
         public function admin_init(){
-            register_setting('wp_slider_plugin_group', 'wp_slider_plugin_options');
+            register_setting('wp_slider_plugin_group', 'wp_slider_plugin_options', array($this, 'wp_slider_plugin_validate'));
 
             add_settings_section(
                 'wp_slider_main_section',
@@ -40,7 +40,10 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
                 'Slider Title',
                 array($this, 'wp_slider_plugin_title_callback'),
                 'wp_slider_plugin_page2',
-                'wp_slider_second_section'
+                'wp_slider_second_section',
+                array(
+                        'label_for' => 'wp_slider_plugin_title'
+                )
             );
 
             add_settings_field(
@@ -48,7 +51,10 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
                 'Display bullets',
                 array($this, 'wp_slider_plugin_bullets_callback'),
                 'wp_slider_plugin_page2',
-                'wp_slider_second_section'
+                'wp_slider_second_section',
+                array(
+                        'label_for' => 'wp_slider_plugin_bullets'
+                )
             );
 
             add_settings_field(
@@ -56,7 +62,14 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
                 'Slider Style',
                 array($this, 'wp_slider_plugin_style_callback'),
                 'wp_slider_plugin_page2',
-                'wp_slider_second_section'
+                'wp_slider_second_section',
+                array(
+                        'items' => array(
+                                'style-1',
+                                'style-2'
+                        ),
+                        'label_for' => 'wp_slider_plugin_style'
+                )
             );
         }
 
@@ -66,7 +79,8 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
             <?php
         }
 
-        public function wp_slider_plugin_title_callback(){
+        // $args is referenced with the array with the label_for attribute
+        public function wp_slider_plugin_title_callback($args){
             ?>
                 <input
                     type="text"
@@ -77,7 +91,8 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
             <?php
         }
 
-        public function wp_slider_plugin_bullets_callback(){
+        // $args is referenced with the array with the label_for attribute
+        public function wp_slider_plugin_bullets_callback($args){
             ?>
                 <input
                     type="checkbox"
@@ -94,25 +109,34 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
             <?php
         }
 
-        public function wp_slider_plugin_style_callback(){
+        public function wp_slider_plugin_style_callback($args){
             ?>
                 <select
                     id="wp_slider_plugin_style"
                     name="wp_slider_plugin_options[wp_slider_plugin_style]">
-                    <option value="style-1"
-                            <?php
+                    <?php
+                        foreach ($args['items'] as $item):
+                    ?>
+                            <option value="<?php echo esc_attr($item); ?>"
+                                <?php
                                 isset(self::$options['wp_slider_plugin_style'])
-                                    ? selected('style-1', self::$options['wp_slider_plugin_style'], true)
-                                    : ''; ?>>Style 1
-                    </option>
-                    <option value="style-2"
-                        <?php
-                            isset(self::$options['wp_slider_plugin_style'])
-                                ? selected('style-2', self::$options['wp_slider_plugin_style'], true)
-                                : ''; ?>> Style 2
-                    </option>
+                                    ? selected($item, self::$options['wp_slider_plugin_style'], true)
+                                    : ''; ?>
+                            >
+                                <?php echo esc_html(ucfirst($item)) ?>
+                            </option>
+                    <?php endforeach; ?>
                 </select>
             <?php
+        }
+
+        // Sanitize submitted data
+        public function wp_slider_plugin_validate($input){
+            $new_input = array();
+            foreach ($input as $key => $value) {
+                $new_input[$key] = sanitize_text_field($value);
+            }
+            return $new_input;
         }
 
     }
