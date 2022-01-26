@@ -134,6 +134,23 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
         public function wp_slider_plugin_validate($input){
             $new_input = array();
             foreach ($input as $key => $value) {
+                switch ($key){
+                    case 'wp_slider_plugin_title':
+                        if(empty($value)){
+                            $value = 'Please, type some text';
+                        }
+                        $new_input[$key] = sanitize_text_field($value);
+                    break;
+                    case 'wp_slider_plugin_url':
+                        $new_input[$key] = esc_url_raw($value);
+                    break;
+                    case 'wp_slider_plugin_int':
+                        $new_input[$key] = absint($value);
+                    break;
+                    default:
+                        $new_input[$key] = sanitize_text_field($value);
+                    break;
+                }
                 $new_input[$key] = sanitize_text_field($value);
             }
             return $new_input;
