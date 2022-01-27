@@ -27,7 +27,12 @@ if(!class_exists('WP_Slider_Plugin_Shortcode')){
             if(!empty($id)){
                 $id = array_map('absint', explode(',',$id));
             }
-        }
 
+            ob_start();
+            // Can't us require_once if the user want to use the slider more than once in a post
+            require(WP_SLIDER_PLUGIN_PATH . 'views/wp-slider-plugin_shortcode.php');
+
+            return ob_get_clean();
+        }
     }
 }
