@@ -98,6 +98,15 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
         }
 
         public function wp_slider_plugin_settings_page(){
+            // Prevent malicious access on plugin settings page
+            if(!current_user_can('manage_options')){
+                return;
+            }
+            if(isset($_GET['settings-updated'])){
+                add_settings_error('wp_slider_plugin_options', 'wp_slider_plugin_message', 'Settings Saved', 'success');
+            }
+            settings_errors('wp_slider_plugin_options');
+
         	require(WP_SLIDER_PLUGIN_PATH . 'views/settings-page.php');
         }
     }

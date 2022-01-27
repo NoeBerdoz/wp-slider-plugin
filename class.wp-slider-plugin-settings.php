@@ -137,6 +137,7 @@ if(!class_exists('WP_Slider_Plugin_Settings')) {
                 switch ($key){
                     case 'wp_slider_plugin_title':
                         if(empty($value)){
+                            add_settings_error('wp_slider_plugin_options', 'wp_slider_plugin_message', 'The title cannot be empty', 'error');
                             $value = 'Please, type some text';
                         }
                         $new_input[$key] = sanitize_text_field($value);
