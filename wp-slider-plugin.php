@@ -46,6 +46,9 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
 
             require_once(WP_SLIDER_PLUGIN_PATH . 'class.wp-slider-plugin-settings.php');
             $WP_Slider_Plugin_Settings = new WP_Slider_Plugin_Settings();
+
+            require_once(WP_SLIDER_PLUGIN_PATH . 'shortcodes/class.wp-slider-plugin-shortcode.php');
+            $WP_Slider_Plugin_Shortcode = new WP_Slider_Plugin_Shortcode();
         }
 
         public function define_constants(){
