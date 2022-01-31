@@ -32,6 +32,11 @@ if(!class_exists('WP_Slider_Plugin_Shortcode')){
             // Can't us require_once if the user want to use the slider more than once in a post
             require(WP_SLIDER_PLUGIN_PATH . 'views/wp-slider-plugin_shortcode.php');
 
+            // Add files dependencies when shortcode is called
+            wp_enqueue_script('wp-slider-plugin-main-jq');
+            wp_enqueue_script('wp-slider-plugin-options-js');
+            wp_enqueue_style('wp-slider-plugin-main-css');
+            wp_enqueue_style('wp-slider-plugin-style-css');
             return ob_get_clean();
         }
     }

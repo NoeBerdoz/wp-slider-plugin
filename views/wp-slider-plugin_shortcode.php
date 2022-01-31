@@ -25,7 +25,7 @@
             // Add image as flexlider says
             the_post_thumbnail('full', array('class' => 'img-fluid'));
         ?>
-            <div class="mvs-container">
+            <div class="wps-container">
                 <div class="slider-details-container">
                     <div class="wrapper">
                         <div class="slider-title">

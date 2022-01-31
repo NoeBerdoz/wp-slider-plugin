@@ -49,6 +49,11 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
 
             require_once(WP_SLIDER_PLUGIN_PATH . 'shortcodes/class.wp-slider-plugin-shortcode.php');
             $WP_Slider_Plugin_Shortcode = new WP_Slider_Plugin_Shortcode();
+
+            /* Add external scripts to WP
+             *  priority 999 to force the scripts to be at end queue
+             */
+            add_action('wp_enqueue_scripts', array($this, 'register_scripts'), 999);
         }
 
         public function define_constants(){
@@ -111,6 +116,19 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
             settings_errors('wp_slider_plugin_options');
 
         	require(WP_SLIDER_PLUGIN_PATH . 'views/settings-page.php');
+        }
+
+        public function register_scripts(){
+
+            // Flexslider JS, Dependency Jquery, Placed on footer
+            wp_register_script('wp-slider-plugin-main-jq', WP_SLIDER_PLUGIN_URL . 'vendor/flexslider/jquery.flexslider-min.js', array('jquery'), WP_SLIDER_PLUGIN_VERSION, true);
+            wp_register_script('wp-slider-plugin-options-js', WP_SLIDER_PLUGIN_URL . 'vendor/flexslider/flexslider.js', array('jquery'), WP_SLIDER_PLUGIN_VERSION, true);
+
+            // Flexslider CSS, no dependency, Placed on head
+            wp_register_style('wp-slider-plugin-main-css', WP_SLIDER_PLUGIN_URL . 'vendor/flexslider/flexslider.css', array(), 'all');
+
+            // CSS
+            wp_register_style('wp-slider-plugin-style-css', WP_SLIDER_PLUGIN_URL . 'assets/css/frontend.css', array(), 'all');
         }
     }
 }

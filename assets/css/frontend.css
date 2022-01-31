@@ -1,0 +1,110 @@
+/* Flex Slider */
+
+.wp-slider-plugin{
+    position: relative;
+}
+
+.wp-slider-plugin.flexslider{
+    border: 0 !important;
+}
+
+.wp-slider-plugin .img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.wp-slider-plugin .wps-container{
+    max-width: 1140px;
+    width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.wp-slider-plugin .flex-direction-nav{
+    display: none !important;
+}
+
+.wp-slider-plugin .flex-control-nav {
+    bottom: 10px !important;
+}
+
+.wp-slider-plugin .flex-direction-nav a{
+    height: 50px;
+}
+
+.wp-slider-plugin .slider-details-container {
+    color: #FFF;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.wp-slider-plugin .slider-details-container .subtitle{
+    margin-bottom: 15px;
+}
+
+.wp-slider-plugin .slider-details-container .slider-title{
+    color: #FFF;
+    font-weight: 700;
+}
+
+.wp-slider-plugin .slider-details-container a{
+    color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+    padding: 5px 25px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.wp-slider-plugin .slider-details-container a:hover{
+    color: #fff;
+}
+
+.wp-slider-plugin .flexslider .slides {
+    padding: 0 !important;
+}
+
+.wp-slider-plugin .flex-control-paging li a.flex-active {
+    width: 25px !important;
+}
+
+.wp-slider-plugin .flex-control-nav li {
+    margin: 0 3px !important;
+}
+
+/* Design Options */
+
+/* Style 1 */
+
+.wp-slider-plugin.style-1 .slider-details-container .link{
+    background-color: #1d4671;
+}
+
+.wp-slider-plugin.style-1 .flex-control-paging li a.flex-active {
+    background: rgb(182, 2, 2) !important;
+}
+
+.wp-slider-plugin.style-1 .flex-control-paging li a {
+    background: rgb(247, 247, 247);
+}
+
+/* Style 2 */
+
+.wp-slider-plugin.style-2 .slider-details-container .link{
+    background-color: #71481d;
+}
+
+.wp-slider-plugin.style-2 .flex-control-paging li a.flex-active {
+    background: rgb(2, 182, 14) !important;
+    width: 25px;
+}
+
+.wp-slider-plugin.style-2 .flex-control-paging li a {
+    background: rgb(247, 247, 247);
+    height: 10px;
+    width: 15px;
+    border-radius: 0;
+}
