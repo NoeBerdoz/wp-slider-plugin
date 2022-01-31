@@ -1,0 +1,9 @@
+.wp-slider-plugin-metabox label{
+    color: #f00;
+}
+.wp-slider-plugin-metabox td{
+    padding: 5px;
+}
+.wp-slider-plugin-metabox th{
+    padding: 10px 10px 5px 0;
+}

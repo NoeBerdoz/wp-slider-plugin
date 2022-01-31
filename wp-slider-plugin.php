@@ -54,6 +54,7 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
              *  priority 999 to force the scripts to be at end queue
              */
             add_action('wp_enqueue_scripts', array($this, 'register_scripts'), 999);
+            add_action('admin_enqueue_scripts', array($this, 'register_admin_scripts'));
         }
 
         public function define_constants(){
@@ -129,6 +130,14 @@ if(!class_exists('WP_SLIDER_PLUGIN')){
 
             // CSS
             wp_register_style('wp-slider-plugin-style-css', WP_SLIDER_PLUGIN_URL . 'assets/css/frontend.css', array(), 'all');
+        }
+
+        public function register_admin_scripts(){
+            // Make sure to handle file only in slider admin
+            global $typenow;
+            if($typenow == 'wp-slider-plugin'){
+                wp_enqueue_style('wp-slider-plugin-admin-css', WP_SLIDER_PLUGIN_URL . 'assets/css/admin.css', array());
+            }
         }
     }
 }
